@@ -1,0 +1,17 @@
+begin
+  input light
+  input distance
+  let led 
+  while(1) do 
+      if(light off) then //มืด ไม่มีแสงสว่าง  
+          led on
+      else //มีแสงจากที่อื่น 
+          led off 
+      if(distance < ....) then //ระยะที่ได้จาก ultrasonic 
+          led on
+      else 
+          led off
+  
+  end
+end
+
