@@ -1,3 +1,4 @@
+# Trello
 https://trello.com/b/OQcqUcAr/agile-board-template-trello
 # IoT-Autolight-Smarthome
 
@@ -16,4 +17,4 @@ https://trello.com/b/OQcqUcAr/agile-board-template-trello
 
 # Software Specifications #
 1. Keil uVision5
-2. Programming Language : C
+2. Programming Language: C
