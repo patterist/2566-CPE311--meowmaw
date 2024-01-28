@@ -3,7 +3,7 @@ https://trello.com/b/OQcqUcAr/agile-board-template-trello
 # IoT-Autolight-Smarthome
 
 # Project Objectives
-
+เพื่อใช้เป็นโมเดลแบบทดลองการทำไฟอัตโนมัติเมื่อไม่มีแสงไฟ ไฟจะติด หากมีแสงไฟจะดับ และทดสอบการใช้ ultrasonic ถ้าหากมีคนเดินผ่านเข้าห้องหรือออก ไฟจะติดดับ และมีเสียงเตือน
 
 
 # Hardware Specifications #
