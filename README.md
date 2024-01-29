@@ -1,5 +1,5 @@
-# Trello
-https://trello.com/b/OQcqUcAr/agile-board-template-trello
+# PLANNING
+[https://docs.google.com/spreadsheets/d/11L7wOtM9bgn6GEqIf50VK_a39UwIqHRm_U96YPt9-Ek/edit#gid=0)](https://docs.google.com/spreadsheets/d/11L7wOtM9bgn6GEqIf50VK_a39UwIqHRm_U96YPt9-Ek/edit#gid=0)
 # IOT-Autolight-Smarthome
 
 # Project Objectives
