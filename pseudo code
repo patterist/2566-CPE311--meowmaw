@@ -1,17 +1,36 @@
+ultrasonic -> จับวัตถุที่ผ่านภายในระยะที่กำหนด
+7seg ->  จะแสดงจำนวนของวัตถุที่ผ่าน จาก ultrasonic 
+buzzer -> จะดังเมื่อ ultrasonic จับวัตถุที่ผ่านได้
+led -> จะแทนเป็นไฟห้อง ไฟจะติดเมื่อ ultrasonic จับวัตถุได้
+
+light sensor -> จะตรวจจับแสงว่า ในขณะนี้ มีแสงจากที่อื่นเข้ามาหรือไม่
+led -> แทนเป็นไฟ ถ้า light sensor จับแสงแล้วพบว่า ไม่มีแสงจากภายนอก  ไฟจะติด   หากมีแสงจากภายนอก ไฟจะดับ
+
+
+
+
 begin
-  input light
-  input distance
-  let led 
-  while(1) do 
-      if(light off) then //มืด ไม่มีแสงสว่าง  
-          led on
-      else //มีแสงจากที่อื่น 
-          led off 
-      if(distance < ....) then //ระยะที่ได้จาก ultrasonic 
-          led on
-      else 
-          led off
-  
-  end
+    ultrasonic
+    buzzer 
+    7 seg
+    light sensor //ตัวจับแสง
+    led 
+
+    while(true)  
+        if(ultrasonic < 5 cm )
+                buzzer on
+                led on
+                7 seg +1 print +1 per ultrasonic do
+                
+        if(light sensor ไม่เจอแสง)
+                buzzer on
+                led on
+
+
+        else 
+                led off
+
+
+
 end
 
