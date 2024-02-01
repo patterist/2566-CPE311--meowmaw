@@ -1,0 +1,85 @@
+//เสียงเบาไป ต้องเพิ่มเสียง
+
+
+
+
+#define E				659	
+/*for 10ms update event*/
+
+#define TIMx_PSC			2 
+#define ARR_CALCULATE(N) ((32000000) / ((TIMx_PSC) * (N)))
+
+
+void SystemClock_Config(void);
+void buzz_con(void); //PB5 buzz   TIM3_CH2
+void TIM_OC(uint16_t);
+void tim_con(uint16_t);
+void tim_buzz(uint16_t);
+
+int main(void)
+{
+  SystemClock_Config();
+	tim_buzz(ARR_CALCULATE(E));
+	LL_mDelay(250);
+	LL_TIM_SetAutoReload(TIM3, 1);
+	
+	while(1);  
+}
+
+void buzz_con (void){
+	
+	LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOB);
+	LL_GPIO_InitTypeDef buzz;
+	
+	buzz.Mode = LL_GPIO_MODE_ALTERNATE;
+	buzz.Alternate = LL_GPIO_AF_2;
+	buzz.Pin = LL_GPIO_PIN_5;
+	buzz.Pull = LL_GPIO_PULL_NO;
+	buzz.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
+	buzz.Speed = LL_GPIO_SPEED_FREQ_VERY_HIGH;
+	
+	LL_GPIO_Init(GPIOB, &buzz);
+	
+}
+
+void tim_con(uint16_t ARR){
+	LL_TIM_InitTypeDef timbase_initstructure;
+	
+	LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM3);
+	//Time-base configure
+	timbase_initstructure.ClockDivision = LL_TIM_CLOCKDIVISION_DIV1;
+	timbase_initstructure.CounterMode = LL_TIM_COUNTERMODE_UP;
+	timbase_initstructure.Autoreload = ARR - 1;
+	timbase_initstructure.Prescaler =  TIMx_PSC- 1;
+	LL_TIM_Init(TIM3, &timbase_initstructure);
+	
+	LL_TIM_EnableCounter(TIM3); 
+
+}
+
+void tim_buzz(uint16_t note){
+	LL_TIM_OC_InitTypeDef tim_oc;
+	
+	buzz_con();
+	tim_con(note);
+	
+	tim_oc.OCState = LL_TIM_OCSTATE_DISABLE;
+	tim_oc.OCMode = LL_TIM_OCMODE_PWM1;
+	tim_oc.OCPolarity = LL_TIM_OCPOLARITY_HIGH;
+	tim_oc.CompareValue = LL_TIM_GetAutoReload(TIM3) /2; 
+	LL_TIM_OC_Init(TIM3, LL_TIM_CHANNEL_CH2, &tim_oc);
+	/*Interrupt Configure*/
+	NVIC_SetPriority(TIM3_IRQn, 1);
+	NVIC_EnableIRQ(TIM3_IRQn);
+	LL_TIM_EnableIT_CC2(TIM3);
+	
+	/*Start Output Compare in PWM Mode*/
+	LL_TIM_CC_EnableChannel(TIM3, LL_TIM_CHANNEL_CH2);
+	LL_TIM_EnableCounter(TIM3);
+}
+
+void TIM3_IRQHandler(void){
+	if(LL_TIM_IsActiveFlag_CC2(TIM3) == SET){
+		LL_TIM_ClearFlag_CC2(TIM3);
+	}
+}
