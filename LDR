@@ -1,0 +1,70 @@
+void LDR_con(void); //PA5 LDR
+void PA5_adc_con(void);
+void test(void);
+
+int adc;
+
+int main(void)
+{
+  SystemClock_Config();
+	PA5_adc_con();
+	test();
+	
+	
+	while(1){
+		LL_ADC_REG_StartConversionSWStart(ADC1);
+		while(LL_ADC_IsActiveFlag_EOCS(ADC1) == 0);
+		adc = LL_ADC_REG_ReadConversionData10(ADC1);
+		
+		if(adc < 1000) // เปลี่ยนได้ ยังไม่แน่นอน
+			LL_GPIO_SetOutputPin(GPIOB, LL_GPIO_PIN_6);
+		else
+			LL_GPIO_ResetOutputPin(GPIOB, LL_GPIO_PIN_6);
+	}
+}
+
+void LDR_con (void){
+	
+	LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOA);
+	LL_GPIO_InitTypeDef ldr;
+	
+	ldr.Mode = LL_GPIO_MODE_ANALOG;
+	ldr.Pin = LL_GPIO_PIN_5;
+	ldr.Pull = LL_GPIO_PULL_NO;
+	ldr.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
+	ldr.Speed = LL_GPIO_SPEED_FREQ_VERY_HIGH;
+	
+	LL_GPIO_Init(GPIOA, &ldr);
+}
+
+void PA5_adc_con(void){
+	LL_ADC_InitTypeDef adc_con;
+	LDR_con();
+	LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_ADC1);
+	
+	adc_con.DataAlignment = LL_ADC_DATA_ALIGN_RIGHT;
+	adc_con.Resolution = LL_ADC_RESOLUTION_10B;
+	adc_con.LowPowerMode = LL_ADC_LP_AUTOWAIT_NONE;
+	adc_con.SequencersScanMode = LL_ADC_SEQ_SCAN_DISABLE;
+	LL_ADC_Init(ADC1, &adc_con);
+	
+	LL_ADC_REG_SetSequencerRanks(ADC1, LL_ADC_REG_RANK_1, LL_ADC_CHANNEL_5);
+	LL_ADC_SetChannelSamplingTime(ADC1, LL_ADC_CHANNEL_5, LL_ADC_SAMPLINGTIME_48CYCLES);
+	
+	LL_ADC_Enable(ADC1);
+}
+
+
+
+void test(void){
+	LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOB);
+	LL_GPIO_InitTypeDef led;
+	
+	led.Mode = LL_GPIO_MODE_OUTPUT;
+	led.Pin = LL_GPIO_PIN_6;
+	led.Pull = LL_GPIO_PULL_NO;
+	led.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
+	led.Speed = LL_GPIO_SPEED_FREQ_VERY_HIGH;
+	
+	LL_GPIO_Init(GPIOB, &led);
+}
