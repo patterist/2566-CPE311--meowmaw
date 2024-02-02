@@ -1,0 +1,67 @@
+//เอาไว้แสดงค่าความสว่างที่ ldr มารับได้
+//เหลือ function int_to_arr  ใช้แปลงค่าจาก int จำนวนเต็มให้เก็บในรูปของ array เพื่อนำไปใช้แสดงผลใน 7seg
+
+
+void seg_con(void);
+void int_to_arr(void);
+
+uint8_t i;
+uint32_t seg[4] ; // ตัวเลขที่นำไปแสดงผลจริงใน 7seg บนบอร์ด
+uint32_t digit[4] = {LL_GPIO_PIN_0 , LL_GPIO_PIN_1 , LL_GPIO_PIN_2 , LL_GPIO_PIN_3 };
+uint32_t number[10] ={LL_GPIO_PIN_2 | LL_GPIO_PIN_10 | LL_GPIO_PIN_11 | LL_GPIO_PIN_12 | LL_GPIO_PIN_13 | LL_GPIO_PIN_14, //0
+										 LL_GPIO_PIN_10 | LL_GPIO_PIN_11, //1
+										 LL_GPIO_PIN_2 | LL_GPIO_PIN_10 | LL_GPIO_PIN_12 | LL_GPIO_PIN_13 | LL_GPIO_PIN_15, //2
+										 LL_GPIO_PIN_2 | LL_GPIO_PIN_10 | LL_GPIO_PIN_11 | LL_GPIO_PIN_12 | LL_GPIO_PIN_15, //3
+										 LL_GPIO_PIN_10 | LL_GPIO_PIN_11 | LL_GPIO_PIN_14 | LL_GPIO_PIN_15, //4
+										 LL_GPIO_PIN_2 | LL_GPIO_PIN_11 | LL_GPIO_PIN_12 | LL_GPIO_PIN_14 | LL_GPIO_PIN_15, //5
+										 LL_GPIO_PIN_2 | LL_GPIO_PIN_11 | LL_GPIO_PIN_12 | LL_GPIO_PIN_13 | LL_GPIO_PIN_14 | LL_GPIO_PIN_15, //6
+										 LL_GPIO_PIN_2 | LL_GPIO_PIN_10 | LL_GPIO_PIN_11, //7
+										 LL_GPIO_PIN_2 | LL_GPIO_PIN_10 | LL_GPIO_PIN_11 | LL_GPIO_PIN_12 | LL_GPIO_PIN_13 | LL_GPIO_PIN_14 | LL_GPIO_PIN_15, //8
+										 LL_GPIO_PIN_2 | LL_GPIO_PIN_10 | LL_GPIO_PIN_11 | LL_GPIO_PIN_12 | LL_GPIO_PIN_14 | LL_GPIO_PIN_15	}; //9
+//array number ใช้เลือกค่าจาก 0-9 
+
+
+
+int main(void)
+{
+	SystemClock_Config();
+	seg_con();
+	
+	
+	
+	
+	while(1){
+		
+		for(i = 0; i <4 ; ++i){
+			LL_GPIO_ResetOutputPin(GPIOC, LL_GPIO_PIN_0 | LL_GPIO_PIN_1 | LL_GPIO_PIN_2 | LL_GPIO_PIN_3);
+		  LL_GPIO_ResetOutputPin(GPIOB, LL_GPIO_PIN_2 | LL_GPIO_PIN_10 | LL_GPIO_PIN_11 | LL_GPIO_PIN_12 | LL_GPIO_PIN_13 | LL_GPIO_PIN_14 | LL_GPIO_PIN_15);
+			
+			LL_GPIO_SetOutputPin(GPIOB, number[seg[i]]);
+			LL_GPIO_SetOutputPin(GPIOC, digit[i]);
+			
+			LL_mDelay(1);
+	}
+}
+}
+
+void seg_con(void){
+	LL_GPIO_InitTypeDef ltc_init;
+	
+	
+	LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOB); //seg_controll
+	LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_GPIOC); //digit
+	ltc_init.Mode = LL_GPIO_MODE_OUTPUT;
+	ltc_init.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
+	ltc_init.Pull = LL_GPIO_PULL_NO;
+	ltc_init.Speed = LL_GPIO_SPEED_FREQ_VERY_HIGH;
+	ltc_init.Pin = LL_GPIO_PIN_2 | LL_GPIO_PIN_10 | LL_GPIO_PIN_11 | LL_GPIO_PIN_12 | LL_GPIO_PIN_13 | LL_GPIO_PIN_14 | LL_GPIO_PIN_15;
+	LL_GPIO_Init(GPIOB , &ltc_init);
+	
+	ltc_init.Pin = LL_GPIO_PIN_0 | LL_GPIO_PIN_1 | LL_GPIO_PIN_2 | LL_GPIO_PIN_3;
+	LL_GPIO_Init(GPIOC , &ltc_init);
+}
+
+void int_to_arr(void){
+	
+
+}
