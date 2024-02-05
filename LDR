@@ -1,6 +1,6 @@
 void LDR_con(void); //PA5 LDR
 void PA5_adc_con(void);
-void test(void);
+void test(void);  //led
 
 int adc;
 
@@ -8,7 +8,7 @@ int main(void)
 {
   SystemClock_Config();
 	PA5_adc_con();
-	test();
+	test(); //led
 	
 	
 	while(1){
