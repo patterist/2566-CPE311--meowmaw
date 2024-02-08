@@ -1,6 +1,6 @@
 # PLANNING
 [https://docs.google.com/spreadsheets/d/11L7wOtM9bgn6GEqIf50VK_a39UwIqHRm_U96YPt9-Ek/edit#gid=0)](https://docs.google.com/spreadsheets/d/11L7wOtM9bgn6GEqIf50VK_a39UwIqHRm_U96YPt9-Ek/edit#gid=0)
-# IOT-Autolight-Smarthome
+# Autolight-Smarthome
 
 # Project Objectives
 เพื่อใช้เป็นโมเดลแบบทดลองการทำไฟอัตโนมัติเมื่อไม่มีแสงไฟ ไฟจะติด หากมีแสงไฟจะดับ และทดสอบการใช้ ultrasonic ถ้าหากมีคนเดินผ่านเข้าห้องหรือออก ไฟจะติดดับ และมีเสียงเตือน
