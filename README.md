@@ -13,7 +13,8 @@
 4. Buzzer
 5. 7 segment
 6. Jumper Wire
-
+7. LDR
+8. LED
 
 # Software Specifications #
 1. Keil uVision5
