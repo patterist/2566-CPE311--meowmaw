@@ -27,3 +27,7 @@ https://github.com/patterist/2566-CPE311--meowmaw/assets/84564874/60908f19-fcb9-
 # Software Specifications #
 1. Keil uVision5
 2. Programming Language: C
+   
+# Presentation #
+[AUTO LIGHT SMART HOME.pdf](https://github.com/patterist/2566-CPE311--meowmaw/files/14283939/AUTO.LIGHT.SMART.HOME.pdf)
+
