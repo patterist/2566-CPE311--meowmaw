@@ -6,6 +6,10 @@
 https://github.com/patterist/2566-CPE311--meowmaw/assets/84564874/d50462b8-9eb1-48c9-aa71-6971d6b6d048
 
 
+https://github.com/patterist/2566-CPE311--meowmaw/assets/84564874/60908f19-fcb9-4096-a413-e3277b57dc83
+
+
+
 # Project Objectives
 เพื่อใช้เป็นโมเดลแบบทดลองการทำไฟอัตโนมัติเมื่อไม่มีแสงไฟ ไฟจะติด หากมีแสงไฟจะดับ และทดสอบการใช้ ultrasonic ถ้าหากมีคนเดินผ่านเข้าห้องหรือออก ไฟจะติดดับ และมีเสียงเตือน
 
